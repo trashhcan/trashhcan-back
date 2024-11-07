@@ -48,7 +48,7 @@ jobs:
     #   run: gradle build
 
     - name: docker image build
-      run: docker build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/mutsa-test .
+      run: docker build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/trashhcan .
 
     - name: docker login
       uses: docker/login-action@v2
@@ -57,7 +57,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: docker hub push
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mutsa-test
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/trashhcan
 
   # ===== ec2 인스턴스 판 다음에 설정하기! =====
   # deploy-docker-image-to-ec2:
@@ -66,13 +66,13 @@ jobs:
 
   #   steps:
   #     - name: Docker pull
-  #       run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mutsa-test
+  #       run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/trashhcan
 
   #     - name: Stop existing Docker containers
   #       run: sudo docker stop $(sudo docker ps -q) 2>/dev/null || true
 
   #     - name: Run new Docker container
-  #       run: sudo docker run --name mutsa-test --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/mutsa-test
+  #       run: sudo docker run --name trashhcan --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/trashhcan
 
   #     - name: Delete old Docker image
   #       run: sudo docker system prune -f
