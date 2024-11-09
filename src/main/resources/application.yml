@@ -3,7 +3,7 @@ spring:
     include: SECRET-KEY
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test-mutsa # 메모리 내 데이터베이스 URL
+    url: jdbc:h2:tcp://localhost/~/test-trashhcan # 메모리 내 데이터베이스 URL
     driver-class-name: org.h2.Driver # H2 드라이버 클래스
     username: sa # 기본 사용자 이름
     password: # 기본 비밀번호는 비워둡니다.
