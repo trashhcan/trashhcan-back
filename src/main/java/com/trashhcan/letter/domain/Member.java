@@ -19,4 +19,6 @@ public class Member extends BaseTimeEntity{
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    private String provider;
 }

@@ -33,7 +33,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/api/**").authenticated())
 
-
                 // 소셜 로그인
                 .oauth2Login(oauth -> oauth
                                 .userInfoEndpoint(userInfo -> userInfo
