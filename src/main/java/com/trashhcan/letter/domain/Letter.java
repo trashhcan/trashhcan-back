@@ -18,6 +18,9 @@ public class Letter extends BaseTimeEntity{
     private String content; //null 가능한가요?
     private String image_url; //우선 이미지 url String으로 처리.
 
+    @Column(nullable = false) //닉네임 필수 입력
+    private  String nickname;
+
     @JoinColumn(name="sender_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
