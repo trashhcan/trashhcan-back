@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface LetterBoxJpaRepository extends JpaRepository<LetterBox, Long> {
-    List<LetterBox> findByLetter(Letter letter); //나중에 내가 작성한 LetterBox 리스트 호출 기능에서 사용가능
+    List<LetterBox> findByLettersContaining(Letter letter); //내가 쓴 편지가 포함되어 있는 LetterBox 목록
 }

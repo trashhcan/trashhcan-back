@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -22,4 +25,6 @@ public class LetterBox extends BaseTimeEntity{
     @OneToOne(fetch= FetchType.LAZY)
     private Member member;
 
+    @OneToMany(mappedBy = "letterBox", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Letter> letters = new ArrayList<>();
 }
