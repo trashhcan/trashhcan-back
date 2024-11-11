@@ -28,6 +28,24 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    # application.properties 만들기
+    - name: Write secrets to application-SECRET-KEY.properties
+      uses: actions/checkout@v2
+      run: touch ./src/main/resources/application.properties
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }} 
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: echo "database-host=$DB_HOST" > ./src/main/resources/application-SECRET-KEY.properties
+        run: echo "database-name=$DB_NAME" > ./src/main/resources/application-SECRET-KEY.properties
+        run: echo "database-user=$DB_USER" > ./src/main/resources/application-SECRET-KEY.properties
+        run: echo "database-password=$DB_PASSWORD" > ./src/main/resources/application-SECRET-KEY.properties
+    - uses: actions/upload-artifact@v2
+      with:
+        name: application-SECRET-KEY.properties
+        path: ./src/main/resources/application-SECRET-KEY.properties
+
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
