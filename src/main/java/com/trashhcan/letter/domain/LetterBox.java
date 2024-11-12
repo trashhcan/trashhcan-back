@@ -1,10 +1,7 @@
 package com.trashhcan.letter.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,7 @@ public class LetterBox extends BaseTimeEntity{
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "letterBox_id")
     private Long id;
+    private String box_name;
 
     @JoinColumn(name="owner_id")
     @OneToOne(fetch= FetchType.LAZY)
@@ -27,4 +25,11 @@ public class LetterBox extends BaseTimeEntity{
 
     @OneToMany(mappedBy = "letterBox", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Letter> letters = new ArrayList<>();
+
+    @Builder
+    public LetterBox(String box_name, Member member, List<Letter> letters) {
+        this.box_name = box_name;
+        this.member = member;
+        this.letters=letters != null ? letters : new ArrayList<>();
+    }
 }

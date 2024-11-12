@@ -3,6 +3,9 @@ package com.trashhcan.letter.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Setter
@@ -16,10 +19,11 @@ public class Letter extends BaseTimeEntity{
     @Column(name = "letter_id")
     private Long id;
     private String content; //null 가능한가요?
-    private String image_url; //우선 이미지 url String으로 처리.
 
-    @Column(nullable = false) //닉네임 필수 입력
-    private  String nickname;
+    @Column(nullable = true)
+    private String trashimage_url; //이미지 url 로 처리. 나중에 private 떼야 할수도
+    @Column(nullable = true)
+    private String letterimage_url;
 
     @JoinColumn(name="sender_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,4 +32,13 @@ public class Letter extends BaseTimeEntity{
     @JoinColumn(name="letterBox_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private LetterBox letterBox;
+
+    @Builder
+    public Letter(String content, Member member, LetterBox letterBox, String trashimage_url, String letterimage_url) {
+        this.content = content;
+        this.member = member;
+        this.letterBox = letterBox;
+        this.trashimage_url = trashimage_url;
+        this.letterimage_url = letterimage_url;
+    }
 }
