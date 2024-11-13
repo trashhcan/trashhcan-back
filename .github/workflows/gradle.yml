@@ -80,7 +80,7 @@ jobs:
 
   deploy-docker-image-to-ec2:
     needs: build-docker-image
-    runs-on: self-hosted
+    runs-on: [self-hosted, prod]
 
     steps:
       - name: Docker pull
