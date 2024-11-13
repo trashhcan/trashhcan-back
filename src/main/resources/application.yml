@@ -3,14 +3,10 @@ spring:
     include: SECRET-KEY
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test-trashhcan # 메모리 내 데이터베이스 URL
-    driver-class-name: org.h2.Driver # H2 드라이버 클래스
-    username: sa # 기본 사용자 이름
-    password: # 기본 비밀번호는 비워둡니다.
-    h2:
-      console:
-        enabled: true # H2 콘솔을 활성화합니다.
-        path: /h2-console # H2 콘솔의 접근 경로
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${database-host}/${database-name}
+    username: ${database-username}
+    password: ${database-password}
 
   security:
     oauth2:
@@ -28,9 +24,9 @@ spring:
             client-id: ${kakao-client-id}
             client-secret: ${kakao-client-secret}
             client-authentication-method: client_secret_post
-#            scope:
-#              - profile_nickname
-#              - account_email
+        #            scope:
+        #              - profile_nickname
+        #              - account_email
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
@@ -39,12 +35,13 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
 
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
         format_sql: true
-        # dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQLDialect
 
   logging.level:
     org.hibernate.SQL: debug
