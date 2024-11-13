@@ -1,3 +1,6 @@
+
+# dev 브랜치 전용 배포!!
+
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
@@ -9,9 +12,9 @@ name: Java CI/CD with Gradle
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
 jobs:
   build-docker-image:
@@ -80,7 +83,7 @@ jobs:
 
   deploy-docker-image-to-ec2:
     needs: build-docker-image
-    runs-on: [self-hosted, prod]
+    runs-on: [self-hosted, test]
 
     steps:
       - name: Docker pull
