@@ -36,8 +36,6 @@ public class GoogleClient {
     private final String profileUrl = "https://www.googleapis.com/userinfo/v2/me";
 
     private final RestTemplate restTemplate;
-    private static final String NOT_FOUND_GOOGLE_ACCESS_TOKEN_RESPONSE = "Access token not found";
-
     
     public GoogleAccountProfileResponse getGoogleAccountProfile(final String code) {
         // authorization code로 access token 요청
@@ -66,7 +64,7 @@ public class GoogleClient {
 
         try {
             return Optional.ofNullable(response)
-                    .orElseThrow(() -> new LoginException(NOT_FOUND_GOOGLE_ACCESS_TOKEN_RESPONSE))
+                    .orElseThrow(() -> new LoginException("Access Token not found"))
                     .getAccess_token();
         } catch (LoginException e){
             throw new RuntimeException(e);

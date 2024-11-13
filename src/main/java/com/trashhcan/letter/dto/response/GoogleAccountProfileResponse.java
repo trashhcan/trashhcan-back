@@ -7,7 +7,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoogleAccountProfileResponse {
+public class GoogleAccountProfileResponse implements OAuthAccountProfile{
     private String name;
     private String email;
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

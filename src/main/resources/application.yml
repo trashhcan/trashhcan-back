@@ -28,9 +28,9 @@ spring:
             client-id: ${kakao-client-id}
             client-secret: ${kakao-client-secret}
             client-authentication-method: client_secret_post
-            scope:
-              - profile_nickname
-              - account_email
+#            scope:
+#              - profile_nickname
+#              - account_email
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
@@ -48,6 +48,7 @@ spring:
 
   logging.level:
     org.hibernate.SQL: debug
+    org.springframework.web: DEBUG
 
   #  datasource:
   #    url: jdbc:h2:tcp://localhost/~/test-mutsa # 메모리 내 데이터베이스 URL
