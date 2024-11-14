@@ -19,7 +19,7 @@ public class LetterBox extends BaseTimeEntity{
     private Long id;
     private String box_name;
 
-    @JoinColumn(name="owner_id")
+    @JoinColumn(name="member_id")
     @OneToOne(fetch= FetchType.LAZY)
     private Member member;
 

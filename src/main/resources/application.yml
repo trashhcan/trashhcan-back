@@ -3,7 +3,7 @@ spring:
     include: SECRET-KEY
 
 #  datasource:
-#    url: jdbc:h2:tcp://localhost/~/test-trashhcan # 메모리 내 데이터베이스 URL
+#    url: jdbc:h2:tcp://localhost/~/test-trashhcan # 데이터베이스 URL
 #    driver-class-name: org.h2.Driver # H2 드라이버 클래스
 #    username: sa # 기본 사용자 이름
 #    password: # 기본 비밀번호는 비워둡니다.
@@ -18,18 +18,6 @@ spring:
     username: ${database-username}
     password: ${database-password}
 
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${client-id}
-            client-secret: ${client-secret}
-            scope:
-              - email
-              - profile
-            redirect-uri: "http://localhost:8080/login/oauth2/code/google"
-
   jpa:
     show-sql: true
     hibernate:
@@ -37,6 +25,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+#        dialect: org.hibernate.dialect.H2Dialect
         dialect: org.hibernate.dialect.MySQLDialect
 
   logging.level:

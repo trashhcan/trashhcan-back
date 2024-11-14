@@ -12,5 +12,7 @@ import java.util.Optional;
 @Repository
 public interface LetterBoxJpaRepository extends JpaRepository<LetterBox, Long> {
     List<LetterBox> findByLettersContaining(Letter letter);//내가 쓴 편지가 포함되어 있는 LetterBox 목록
-    LetterBox findByMemberId(Long member_id); //특정 멤버 id 로 레터박스 찾음
+
+    Optional<LetterBox> findByMemberId(Long member_id);//특정 멤버 id 로 레터박스 찾음
+    Optional<LetterBox> findLetterBoxById(Long letterbox_id);
 }
