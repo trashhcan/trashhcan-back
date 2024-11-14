@@ -53,7 +53,7 @@ public class OAuthController {
     // 로컽 테스트용
 
 
-    @GetMapping("/google/callback")
+    @PostMapping("/google/callback")
     public ResponseEntity<MemberResponseDto> googleCallback(@RequestBody CodeRequest codeRequest) {
         String code = codeRequest.getCode();
         log.info("Authorization code: {}", code);
@@ -79,7 +79,7 @@ public class OAuthController {
         response.sendRedirect(kakaoLoginUrl);
     }
 
-    @GetMapping("/kakao/callback")
+    @PostMapping("/kakao/callback")
     public ResponseEntity<MemberResponseDto> kakaoCallback(@RequestBody CodeRequest codeRequest) {
         String code = codeRequest.getCode();
         log.info("Authorization code: {}", code);
