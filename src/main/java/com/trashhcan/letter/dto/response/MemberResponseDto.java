@@ -13,5 +13,7 @@ public class MemberResponseDto {
     private String username;
     private String email;
 
-    // jwt 토큰 추가
+    // jwt 토큰
+    private TokenResponse token;
 }
+
