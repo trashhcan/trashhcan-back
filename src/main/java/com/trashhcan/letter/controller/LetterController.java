@@ -4,6 +4,7 @@ import com.trashhcan.letter.dto.request.LetterBoxCreateDto;
 import com.trashhcan.letter.dto.request.LetterCreateDto;
 import com.trashhcan.letter.dto.response.ImageResponseDto;
 import com.trashhcan.letter.dto.response.LetterBoxResponseDto;
+import com.trashhcan.letter.dto.response.LetterListResponseDto;
 import com.trashhcan.letter.dto.response.LetterResponseDto;
 import com.trashhcan.letter.service.LetterService;
 import org.springframework.http.HttpStatus;
@@ -33,9 +34,9 @@ public class LetterController {
         return ResponseEntity.ok(new ImageResponseDto("letter_background", images));
     }
 
-    @PostMapping("/{member_id}")
+    @PostMapping("/{sender_id}")
     public ResponseEntity<Long> createLetter(
-            @PathVariable("member_id") Long memberId,
+            @PathVariable("sender_id") Long memberId,
             @RequestBody LetterCreateDto requestDto)
     {
         Long letterId=letterService.createLetter(requestDto,memberId);
