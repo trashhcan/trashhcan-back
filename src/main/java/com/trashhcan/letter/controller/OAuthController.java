@@ -1,6 +1,7 @@
 package com.trashhcan.letter.controller;
 
 
+import com.trashhcan.letter.dto.request.CodeRequest;
 import com.trashhcan.letter.dto.response.GoogleAccountProfileResponse;
 import com.trashhcan.letter.dto.response.KakaoAccountProfileResponse;
 import com.trashhcan.letter.dto.response.MemberResponseDto;
@@ -12,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -55,9 +53,9 @@ public class OAuthController {
     // 로컽 테스트용
 
 
-    @GetMapping("/google/callback")
-    public ResponseEntity<MemberResponseDto> googleCallback(@RequestParam("code") String code) {
-
+    @PostMapping("/google/callback")
+    public ResponseEntity<MemberResponseDto> googleCallback(@RequestBody CodeRequest codeRequest) {
+        String code = codeRequest.getCode();
         log.info("Authorization code: {}", code);
 
         // 구글 사용자 계정 정보 가져오기
@@ -81,8 +79,9 @@ public class OAuthController {
         response.sendRedirect(kakaoLoginUrl);
     }
 
-    @GetMapping("/kakao/callback")
-    public ResponseEntity<MemberResponseDto> kakaoCallback(@RequestParam("code") String code) {
+    @PostMapping("/kakao/callback")
+    public ResponseEntity<MemberResponseDto> kakaoCallback(@RequestBody CodeRequest codeRequest) {
+        String code = codeRequest.getCode();
         log.info("Authorization code: {}", code);
 
         // 카카오 사용자 계정 정보 가져오기

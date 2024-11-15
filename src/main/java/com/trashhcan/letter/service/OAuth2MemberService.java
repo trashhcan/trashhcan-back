@@ -1,9 +1,10 @@
 package com.trashhcan.letter.service;
 
+import com.trashhcan.letter.config.jwt.JwtTokenProvider;
 import com.trashhcan.letter.domain.Member;
-import com.trashhcan.letter.dto.response.GoogleAccountProfileResponse;
 import com.trashhcan.letter.dto.response.MemberResponseDto;
 import com.trashhcan.letter.dto.response.OAuthAccountProfile;
+import com.trashhcan.letter.dto.response.TokenResponse;
 import com.trashhcan.letter.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class OAuth2MemberService {
     private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public MemberResponseDto signUpOrIn(OAuthAccountProfile oAuthAccountProfile, String provider){
         // 이미 회원이면 회원 객체 반환, 새로운 회원이면 회원 생성 & DB 저장 후 반환
@@ -27,6 +29,12 @@ public class OAuth2MemberService {
             memberRepository.save(member);
         }
 
-        return new MemberResponseDto(member.getId(), member.getUsername(),member.getEmail());
+        TokenResponse token = TokenResponse.of(
+                jwtTokenProvider.generateAccessToken(member.getId()),
+                jwtTokenProvider.generateRefreshToken(member.getId())
+        );
+
+
+        return new MemberResponseDto(member.getId(), member.getUsername(),member.getEmail(), token);
     }
 }
