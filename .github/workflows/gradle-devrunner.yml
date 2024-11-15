@@ -109,6 +109,9 @@ jobs:
       - name: Stop existing Docker containers
         run: sudo docker stop $(sudo docker ps -q) 2>/dev/null || true
 
+      - name: Clean up existing container
+        run: docker rm -f trashhcan-dev || true
+
       - name: Run new Docker container
         run: sudo docker run --name trashhcan-dev --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/trashhcan-dev
 
