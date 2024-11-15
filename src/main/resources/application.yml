@@ -1,7 +1,6 @@
 spring:
   profiles:
     include: SECRET-KEY
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${database-host}/${database-name}
@@ -44,6 +43,7 @@ spring:
   jwt:
     secret: ${jwt-secret-key}
 
+
   jpa:
     show-sql: true
     hibernate:
@@ -51,7 +51,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        #dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQLDialect
+
 
   logging.level:
     org.hibernate.SQL: debug
