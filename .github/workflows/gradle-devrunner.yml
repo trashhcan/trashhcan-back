@@ -96,6 +96,13 @@ jobs:
     - name: docker hub push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/trashhcan-dev
 
+    - name: Upload test report
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report
+        path: build/reports/tests/test/index.html
+
+
 
   deploy-docker-image-to-ec2:
     needs: build-docker-image
