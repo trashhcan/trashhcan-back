@@ -1,6 +1,7 @@
 package com.trashhcan.letter.controller;
 
 import com.trashhcan.letter.dto.request.LetterBoxCreateDto;
+import com.trashhcan.letter.dto.response.ImageResponseDto;
 import com.trashhcan.letter.dto.response.LetterBoxResponseDto;
 import com.trashhcan.letter.service.LetterBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/letterbox")
@@ -41,5 +43,15 @@ public class LetterBoxController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(letterBox);
+    }
+
+    @GetMapping("/image")
+    public ResponseEntity <ImageResponseDto> getLetterIcons(){
+        String url = "trashhcan.s3.ap-northeast-2.amazonaws.com/";
+        List<String> images = List.of("trash1.jpg", "trash2.jpg", "trash3.jpg");
+        images = images.stream()
+                .map(item -> url + item)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new ImageResponseDto("letter_icon", images));
     }
 }

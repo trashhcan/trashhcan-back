@@ -36,7 +36,7 @@ public class SecurityConfig {
             CorsConfiguration configuration = new CorsConfiguration();
 
             configuration.setAllowedMethods(Collections.singletonList("*"));
-            configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://letterbin.netlify.app"));
+            configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173", "https://letterbin.netlify.app"));
             configuration.setAllowedHeaders(Collections.singletonList("*"));
             configuration.setAllowCredentials(true);
             configuration.setMaxAge(3600L);
