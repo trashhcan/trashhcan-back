@@ -27,7 +27,7 @@ public class LetterController {
     @GetMapping("/image")
     public ResponseEntity<ImageResponseDto> getLetterBackgroundImages() {
         String url = "trashhcan.s3.ap-northeast-2.amazonaws.com/";
-        List<String> images = List.of("bg1.jpg", "bg2.jpg", "bg3.jpg", "bg4.jpg");
+        List<String> images = List.of("bg1.png", "bg2.png", "bg3.png", "bg4.png", "bg5.png", "bg6.png", "bg7.png");
         images = images.stream()
                 .map(item -> url + item)
                 .collect(Collectors.toList());
