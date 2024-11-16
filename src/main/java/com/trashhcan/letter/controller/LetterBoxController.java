@@ -47,8 +47,9 @@ public class LetterBoxController {
 
     @GetMapping("/image")
     public ResponseEntity <ImageResponseDto> getLetterIcons(){
+        //구리자만 DB가 필요없고 파일명 형식 변경 시 확장성 젤 좋다.. 이거 사진 바꿀거 아니잖..ㅎ
         String url = "trashhcan.s3.ap-northeast-2.amazonaws.com/";
-        List<String> images = List.of("trash1.jpg", "trash2.jpg", "trash3.jpg");
+        List<String> images = List.of("trash1.png", "trash2.png", "trash3.png", "trash4.png", "trash5.png", "trash6.png", "trash7.png", "trash8.png", "trash9.png", "trash10.png", "trash11.png");
         images = images.stream()
                 .map(item -> url + item)
                 .collect(Collectors.toList());
