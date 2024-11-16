@@ -3,6 +3,7 @@ package com.trashhcan.letter.controller;
 import com.trashhcan.letter.dto.request.LetterBoxCreateDto;
 import com.trashhcan.letter.dto.response.ImageResponseDto;
 import com.trashhcan.letter.dto.response.LetterBoxResponseDto;
+import com.trashhcan.letter.dto.response.LetterListResponseDto;
 import com.trashhcan.letter.service.LetterBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,5 +54,14 @@ public class LetterBoxController {
                 .map(item -> url + item)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(new ImageResponseDto("letter_icon", images));
+    }
+
+    @GetMapping("/list/{member_id}")
+    public ResponseEntity<LetterListResponseDto> getLetterList(
+            @PathVariable("member_id")
+            Long memberId
+    ){
+        LetterListResponseDto letterBoxList = letterboxService.findmyLetterList(memberId);
+        return ResponseEntity.ok(letterBoxList);
     }
 }

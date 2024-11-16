@@ -6,6 +6,7 @@ import com.trashhcan.letter.domain.Member;
 import com.trashhcan.letter.dto.request.LetterBoxCreateDto;
 import com.trashhcan.letter.dto.request.LetterCreateDto;
 import com.trashhcan.letter.dto.response.LetterBoxResponseDto;
+import com.trashhcan.letter.dto.response.LetterListResponseDto;
 import com.trashhcan.letter.dto.response.LetterResponseDto;
 import com.trashhcan.letter.repository.LetterBoxJpaRepository;
 import com.trashhcan.letter.repository.LetterJpaRepository;
@@ -44,12 +45,29 @@ public class LetterBoxService {
         return letterBox.getId();
     }
 
+    public LetterListResponseDto findmyLetterList(Long memberId){
+        List<Letter> letters =letterJpaRepository.findByMemberId(memberId);
+        List<LetterResponseDto> letterResponseDtos = letters.stream()
+                .map(letter -> new LetterResponseDto(
+                        letter.getContent(),
+                        letter.getId(),
+                        letter.getMember().getId(),
+                        letter.getMember().getUsername(),
+                        letter.getLetterBox().getId(),
+                        letter.getLetterimage_url(),
+                        letter.getTrashimage_url(),
+                        letter.getLetter_theme())
+                )
+                .toList();
+        return new LetterListResponseDto(letterResponseDtos);
+    }
+
     //회원의 아이디로 레터박스 찾기
     @Transactional
     public LetterBoxResponseDto findLetterBoxByMemberId(Long memberId) {
         LetterBox letterBox = letterBoxJpaRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 회원의 레터박스를 찾을 수 없습니다."));
-        List<Letter> letters = letterJpaRepository.findByMemberId(memberId);
+        List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBox.getMember().getId());
         List<LetterResponseDto> letterResponseDtos = letters.stream()
                 .map(letter -> new LetterResponseDto(
                         letter.getContent(),
