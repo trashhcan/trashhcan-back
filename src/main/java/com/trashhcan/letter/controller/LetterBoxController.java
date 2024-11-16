@@ -26,7 +26,7 @@ public class LetterBoxController {
     }
 
     //레터박스 아이디로 찾는경우
-    @GetMapping("/find/{letterbox_id}")
+    @GetMapping("/box/{letterbox_id}")
     public ResponseEntity <LetterBoxResponseDto> getLetterBox(@PathVariable("letterbox_id") Long letterBoxId){
         LetterBoxResponseDto letterBox = letterboxService.findLetterBoxByBoxId(letterBoxId);
         if (letterBox == null) { //No Content 204 반환

@@ -36,14 +36,14 @@ public class GoogleClient {
     private final String profileUrl = "https://www.googleapis.com/userinfo/v2/me";
 
     private final RestTemplate restTemplate;
-    
+
     public GoogleAccountProfileResponse getGoogleAccountProfile(final String code) {
         // authorization code로 access token 요청
         final String accessToken = requestGoogleAccessToken(code);
         // access token으로 구글 사용자 정보 요청
         return requestGoogleAccountProfile(accessToken);
     }
-    
+
     // authorization code로 access token 요청하는 메소드
     public String requestGoogleAccessToken(final String code) {
         // 인가코드 디코딩
@@ -70,7 +70,7 @@ public class GoogleClient {
             throw new RuntimeException(e);
         }
     }
-    
+
     // access token으로 구글 사용자 정보 요청하는 메소드
     public GoogleAccountProfileResponse requestGoogleAccountProfile(final String accessToken) {
         // access token을 포함한 객체 생성

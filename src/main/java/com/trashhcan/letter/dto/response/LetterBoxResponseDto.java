@@ -12,5 +12,6 @@ public class LetterBoxResponseDto {
     private Long id;
     private String box_name;
     private Long member_id;
-    private List<Letter> letter_id;
+    private List<LetterResponseDto> letters;
+
 }
