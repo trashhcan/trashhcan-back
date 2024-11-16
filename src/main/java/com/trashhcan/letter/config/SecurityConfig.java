@@ -41,8 +41,9 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 // 권한
                 .authorizeHttpRequests((auth) -> {
-                    auth.requestMatchers(AUTH_WHITELIST).permitAll();
-                    auth.anyRequest().authenticated();
+                   // auth.requestMatchers(AUTH_WHITELIST).permitAll();
+                    // gauth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
                 })
                 .userDetailsService(userDetailsService)
                 // jwt 필터 추가
