@@ -93,9 +93,8 @@ public class LetterBoxService {
     public LetterBoxResponseDto findLetterBoxByBoxId(Long letterBoxId) {
         LetterBox letterBox = letterBoxJpaRepository.findLetterBoxById(letterBoxId)
                 .orElseThrow(() -> new RuntimeException("해당 레터박스를 찾을 수 없습니다."));
-        Optional<LetterBox> letterbox = letterBoxJpaRepository.findLetterBoxById(letterBoxId);
+
         List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBoxId);
-        Letter checkNameLetter = (Letter) letterJpaRepository.findByMemberId(letterBox.getMember().getId());
         List<TrashletterResponseDto> letterResponseDtos = letters.stream()
                 .map(letter -> new TrashletterResponseDto(
                         letter.getContent(),
