@@ -12,6 +12,7 @@ public class MemberResponseDto {
     private Long id;
     private String username;
     private String email;
+    private String box_name;
 
     // jwt 토큰
     private TokenResponse token;
