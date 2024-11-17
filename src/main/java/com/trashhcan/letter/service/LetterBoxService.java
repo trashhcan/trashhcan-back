@@ -8,6 +8,7 @@ import com.trashhcan.letter.dto.request.LetterCreateDto;
 import com.trashhcan.letter.dto.response.LetterBoxResponseDto;
 import com.trashhcan.letter.dto.response.LetterListResponseDto;
 import com.trashhcan.letter.dto.response.LetterResponseDto;
+import com.trashhcan.letter.dto.response.TrashletterResponseDto;
 import com.trashhcan.letter.repository.LetterBoxJpaRepository;
 import com.trashhcan.letter.repository.LetterJpaRepository;
 import com.trashhcan.letter.repository.MemberRepository;
@@ -70,16 +71,15 @@ public class LetterBoxService {
     public LetterBoxResponseDto findLetterBoxByMemberId(Long memberId) {
         LetterBox letterBox = letterBoxJpaRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 회원의 레터박스를 찾을 수 없습니다."));
-        Optional<LetterBox> letterbox = letterBoxJpaRepository.findByMemberId(memberId);
+
         List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBox.getMember().getId());
-        List<LetterResponseDto> letterResponseDtos = letters.stream()
-                .map(letter -> new LetterResponseDto(
+        List<TrashletterResponseDto> letterResponseDtos = letters.stream()
+                .map(letter -> new TrashletterResponseDto(
                         letter.getContent(),
                         letter.getId(),
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
-                        letterbox.map(LetterBox::getBox_name).orElse(null),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())
@@ -95,14 +95,14 @@ public class LetterBoxService {
                 .orElseThrow(() -> new RuntimeException("해당 레터박스를 찾을 수 없습니다."));
         Optional<LetterBox> letterbox = letterBoxJpaRepository.findLetterBoxById(letterBoxId);
         List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBoxId);
-        List<LetterResponseDto> letterResponseDtos = letters.stream()
-                .map(letter -> new LetterResponseDto(
+        Letter checkNameLetter = (Letter) letterJpaRepository.findByMemberId(letterBox.getMember().getId());
+        List<TrashletterResponseDto> letterResponseDtos = letters.stream()
+                .map(letter -> new TrashletterResponseDto(
                         letter.getContent(),
                         letter.getId(),
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
-                        letterbox.map(LetterBox::getBox_name).orElse(null),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())
