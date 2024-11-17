@@ -47,6 +47,8 @@ public class LetterBoxService {
 
     public LetterListResponseDto findmyLetterList(Long memberId){
         List<Letter> letters =letterJpaRepository.findByMemberId(memberId);
+        Optional<LetterBox> letterBox = letterBoxJpaRepository.findByMemberId(memberId);
+
         List<LetterResponseDto> letterResponseDtos = letters.stream()
                 .map(letter -> new LetterResponseDto(
                         letter.getContent(),
@@ -54,7 +56,7 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
-                        letter.getLetterBox().getBox_name(),
+                        letterBox.map(LetterBox::getBox_name).orElse(null),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())
@@ -68,6 +70,7 @@ public class LetterBoxService {
     public LetterBoxResponseDto findLetterBoxByMemberId(Long memberId) {
         LetterBox letterBox = letterBoxJpaRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 회원의 레터박스를 찾을 수 없습니다."));
+        Optional<LetterBox> letterbox = letterBoxJpaRepository.findByMemberId(memberId);
         List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBox.getMember().getId());
         List<LetterResponseDto> letterResponseDtos = letters.stream()
                 .map(letter -> new LetterResponseDto(
@@ -76,7 +79,7 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
-                        letter.getLetterBox().getBox_name(),
+                        letterbox.map(LetterBox::getBox_name).orElse(null),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())
@@ -90,7 +93,7 @@ public class LetterBoxService {
     public LetterBoxResponseDto findLetterBoxByBoxId(Long letterBoxId) {
         LetterBox letterBox = letterBoxJpaRepository.findLetterBoxById(letterBoxId)
                 .orElseThrow(() -> new RuntimeException("해당 레터박스를 찾을 수 없습니다."));
-
+        Optional<LetterBox> letterbox = letterBoxJpaRepository.findLetterBoxById(letterBoxId);
         List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBoxId);
         List<LetterResponseDto> letterResponseDtos = letters.stream()
                 .map(letter -> new LetterResponseDto(
@@ -99,7 +102,7 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
-                        letter.getLetterBox().getBox_name(),
+                        letterbox.map(LetterBox::getBox_name).orElse(null),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())

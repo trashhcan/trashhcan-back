@@ -1,7 +1,5 @@
 package com.trashhcan.letter.dto.response;
 
-import com.trashhcan.letter.domain.LetterBox;
-import com.trashhcan.letter.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,9 +8,9 @@ import lombok.Getter;
 public class LetterResponseDto {
         String content;
         Long id;
-        Long member_id;
+        Long sender_id;
         String user_name;
-        Long letterBox_id;
+        Long this_letterBox_id;
         String sender_box_name;
         String trashimage_url;
         String letterimage_url;

@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class LetterService {
 
@@ -47,13 +49,14 @@ public class LetterService {
     public LetterResponseDto findLetterByLetterId (Long letterId){
         Letter letter =letterJpaRepository.findById(letterId)
                 .orElseThrow(()->new RuntimeException("해당 편지가 없습니다"));
+        Optional<LetterBox> letterbox=letterBoxJpaRepository.findByMemberId(letter.getMember().getId());
         return new LetterResponseDto(
                 letter.getContent(),
                 letter.getId(),
                 letter.getMember().getId(),
                 letter.getMember().getUsername(),
                 letter.getLetterBox().getId(),
-                letter.getLetterBox().getBox_name(),
+                letterbox.map(LetterBox::getBox_name).orElse(null),
                 letter.getTrashimage_url(),
                 letter.getLetterimage_url(),
                 letter.getLetter_theme()
