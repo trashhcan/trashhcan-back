@@ -13,6 +13,7 @@ public class LetterResponseDto {
         Long member_id;
         String user_name;
         Long letterBox_id;
+        String sender_box_name;
         String trashimage_url;
         String letterimage_url;
         String letter_theme;

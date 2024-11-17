@@ -54,6 +54,7 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
+                        letter.getLetterBox().getBox_name(),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())
@@ -75,6 +76,7 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
+                        letter.getLetterBox().getBox_name(),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())
@@ -97,6 +99,7 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
+                        letter.getLetterBox().getBox_name(),
                         letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
                         letter.getLetter_theme())

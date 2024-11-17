@@ -53,6 +53,7 @@ public class LetterService {
                 letter.getMember().getId(),
                 letter.getMember().getUsername(),
                 letter.getLetterBox().getId(),
+                letter.getLetterBox().getBox_name(),
                 letter.getTrashimage_url(),
                 letter.getLetterimage_url(),
                 letter.getLetter_theme()
