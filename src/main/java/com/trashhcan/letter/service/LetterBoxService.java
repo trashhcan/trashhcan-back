@@ -72,7 +72,7 @@ public class LetterBoxService {
         LetterBox letterBox = letterBoxJpaRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 회원의 레터박스를 찾을 수 없습니다."));
 
-        List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBox.getMember().getId());
+        List<Letter> letters = letterJpaRepository.findByLetterBoxId(letterBox.getId());
         List<TrashletterResponseDto> letterResponseDtos = letters.stream()
                 .map(letter -> new TrashletterResponseDto(
                         letter.getContent(),
