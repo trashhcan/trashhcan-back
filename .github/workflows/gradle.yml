@@ -41,9 +41,10 @@ jobs:
         echo "kakao-client-id=$KAKAO_CLIENT_ID" >> ./src/main/resources/application-SECRET-KEY.properties
         echo "kakao-client-secret=$KAKAO_CLIENT_SECRET" >> ./src/main/resources/application-SECRET-KEY.properties
         echo "kakao-redirect-uri=$KAKAO_REDIRECT_URI" >> ./src/main/resources/application-SECRET-KEY.properties
+        echo "jwt-secret-key=$JWT_SECRET_KEY" >> ./src/main/resources/application-SECRET-KEY.properties
       env:
         DB_HOST: ${{ secrets.DB_HOST }}
-        DB_NAME: ${{ secrets.DB_NAME }} 
+        DB_NAME: ${{ secrets.DB_NAME }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -52,6 +53,7 @@ jobs:
         KAKAO_CLIENT_ID: ${{ secrets.KAKAO_CLIENT_ID }}
         KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
         KAKAO_REDIRECT_URI: ${{ secrets.KAKAO_REDIRECT_URI_FINAL }}
+        JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
     
     - name: Upload application-SECRET-KEY.properties
       uses: actions/upload-artifact@v4
