@@ -80,8 +80,8 @@ public class LetterBoxService {
                         letter.getMember().getId(),
                         letter.getMember().getUsername(),
                         letter.getLetterBox().getId(),
-                        letter.getLetterimage_url(),
                         letter.getTrashimage_url(),
+                        letter.getLetterimage_url(),
                         letter.getLetter_theme())
                 )
                 .collect(Collectors.toList());
